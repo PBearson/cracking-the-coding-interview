@@ -7,6 +7,10 @@ class MinHeap(BinaryTreeNode):
         super().__init__(value, parent)
         self.size = 1
 
+    # Insert steps:
+    #   1) Find the soon-to-be-parent node (based on its index, which is a function of the heap size)
+    #   2) Add the new node as a child of the parent
+    #   3) Bubble-up by swapping with the parent until the heap property is satisfied
     def insert(self, value):
 
         if self.size == 0:
@@ -30,6 +34,10 @@ class MinHeap(BinaryTreeNode):
             if curr.parent is None:
                 return
 
+    # Extract steps:
+    #   1) Record the current min value
+    #   2) Find the last node in the heap, remove it, and set its value to the root's value
+    #   3) Bubble-down by swapping with the smallest child until the heap property is satisfied
     def extractMin(self):
 
         if self.size == 0:
