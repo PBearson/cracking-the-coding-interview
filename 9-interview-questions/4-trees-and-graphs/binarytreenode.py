@@ -1,8 +1,30 @@
 class BinaryTreeNode:
-    def __init__(self, value = 0):
+    def __init__(self, value = 0, parent = None):
         self.value = value
         self.left = None
         self.right = None
+        self.parent = parent
+
+    # O(n) approach that uses BFS. Would be more efficient if we used a priority queue.
+    def getNodeByIndex(self, index):
+        if index == 0:
+            return self
+        queue = [self]
+
+        counter = 0
+        while len(queue) > 0:
+            curr = queue.pop(0)
+            
+            if counter == index:
+                return curr
+
+            counter += 1
+
+            if curr.left:
+                queue.append(curr.left)
+            if curr.right:
+                queue.append(curr.right)
+        return None
         
     def getSize(self):
         if self.left is None and self.right is None:
@@ -14,7 +36,6 @@ class BinaryTreeNode:
         else:
             return 1 + self.left.getSize() + self.right.getSize()
 
-    
 def test():
     root = BinaryTreeNode(1)
     left = BinaryTreeNode(2)
@@ -32,6 +53,7 @@ def test():
     right.right = rightright
 
     print(root.getSize(), left.getSize(), right.getSize())
+    print(root.getNodeByIndex(0).value)
 
 
 if __name__ == "__main__":
