@@ -48,6 +48,18 @@ class BinaryTreeNode:
                 queue.append(curr.right)
         print("")
 
+    def traverseDFS(self):
+        queue = [self]
+
+        while len(queue) > 0:
+            curr = queue.pop()
+            print(curr.value, end = " ")
+            if curr.left:
+                queue.append(curr.left)
+            if curr.right:
+                queue.append(curr.right)
+        print("")
+
 def test():
     root = BinaryTreeNode(1)
     left = BinaryTreeNode(2)
@@ -68,6 +80,7 @@ def test():
     print(root.getNodeByIndex(0).value)
 
     root.traverseBFS()
+    root.traverseDFS()
 
 
 if __name__ == "__main__":

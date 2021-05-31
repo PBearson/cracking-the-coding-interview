@@ -44,6 +44,7 @@ def test():
         bst.insert(random.randint(1, 50))
 
     bst.traverseBFS()
+    bst.traverseDFS()
 
     assert True == isBST(bst)
     
