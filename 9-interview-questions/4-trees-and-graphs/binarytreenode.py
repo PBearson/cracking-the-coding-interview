@@ -36,6 +36,18 @@ class BinaryTreeNode:
         else:
             return 1 + self.left.getSize() + self.right.getSize()
 
+    def traverseBFS(self):
+        queue = [self]
+
+        while len(queue) > 0:
+            curr = queue.pop(0)
+            print(curr.value, end = " ")
+            if curr.left:
+                queue.append(curr.left)
+            if curr.right:
+                queue.append(curr.right)
+        print("")
+
 def test():
     root = BinaryTreeNode(1)
     left = BinaryTreeNode(2)
@@ -54,6 +66,8 @@ def test():
 
     print(root.getSize(), left.getSize(), right.getSize())
     print(root.getNodeByIndex(0).value)
+
+    root.traverseBFS()
 
 
 if __name__ == "__main__":
