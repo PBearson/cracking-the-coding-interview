@@ -13,6 +13,13 @@ class Graph:
         if value is not None:
             self.nodes.append(Node(value))
 
+    def traverseDFS(self, root, visited = []):
+        print(root.value)
+        visited.append(root)
+        for r in root.neighbors:
+            if r not in visited:
+                self.traverseDFS(r)
+
 class DirectedGraph(Graph):
     def __init__(self, value = None):
         super().__init__(value)
@@ -39,6 +46,7 @@ def test():
     nC = Node("C")
     nD = Node("D")
     nE = Node("E")
+    nF = Node("F")
 
     g = UndirectedGraph()
     g.insertNode(nA)
@@ -46,12 +54,16 @@ def test():
     g.insertNode(nC)
     g.insertNode(nD)
     g.insertNode(nE)
+    g.insertNode(nF)
 
     g.insertEdge(nA, nB)
     g.insertEdge(nA, nC)
     g.insertEdge(nB, nD)
-    g.insertEdge(nC, nD)
+    g.insertEdge(nC, nE)
+    g.insertEdge(nD, nF)
     g.insertEdge(nB, nE)
+
+    g.traverseDFS(nA)
 
 if __name__ == "__main__":
     test()
