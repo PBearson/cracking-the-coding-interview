@@ -27,9 +27,10 @@ nC = Node("C")
 nD = Node("D")
 nE = Node("E")
 nF = Node("F")
+nG = Node("G")
 
 g = DirectedGraph()
-g.insertNodes([nA, nB, nC, nD, nE, nF])
+g.insertNodes([nA, nB, nC, nD, nE, nF, nG])
 
 g.insertEdge(nA, nB)
 g.insertEdge(nA, nC)
@@ -44,3 +45,8 @@ assert True == pathExists(g, nE, nB)
 assert False == pathExists(g, nC, nB)
 assert False == pathExists(g, nF, nA)
 assert False == pathExists(g, nD, nE)
+for n in g.nodes:
+    if n == nG:
+        assert True == pathExists(g, n, n)
+    else:
+        assert False == pathExists(g, n, nG) == pathExists(g, nG, n)
