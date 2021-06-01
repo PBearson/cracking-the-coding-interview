@@ -4,14 +4,12 @@ class Node:
         self.neighbors = []
 
 class Graph:
-    def __init__(self, value = None):
+    def __init__(self):
         self.nodes = []
-        if value is not None:
-            self.nodes.append(Node(value))
 
-    def insertNode(self, value):
-        if value is not None:
-            self.nodes.append(Node(value))
+    def insertNode(self, node):
+        if node is not None:
+            self.nodes.append(node)
 
     def traverseDFS(self, root, visited = []):
         print(root.value, end = " ")
@@ -36,8 +34,8 @@ class Graph:
         print("")
 
 class DirectedGraph(Graph):
-    def __init__(self, value = None):
-        super().__init__(value)
+    def __init__(self):
+        super().__init__()
 
     # Directed - the parent can go to the child but not vice versa
     def insertEdge(self, parent, child):
@@ -45,8 +43,8 @@ class DirectedGraph(Graph):
             parent.neighbors.append(child)
 
 class UndirectedGraph(Graph):
-    def __init__(self, value = None):
-        super().__init__(value)
+    def __init__(self):
+        super().__init__()
     
     # Undirected - both nodes become neighbors of each other
     def insertEdge(self, node1, node2):
