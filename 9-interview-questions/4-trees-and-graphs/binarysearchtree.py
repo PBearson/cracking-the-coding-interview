@@ -5,10 +5,14 @@ import random
 # Otherwise, it is a right child of the current node.
 
 class BinarySearchTree(BinaryTreeNode):
-    def __init__(self, value = 0, parent = None):
+    def __init__(self, value = None, parent = None):
         super().__init__(value, parent)
 
     def insert(self, value):
+        if self.value == None:
+            self.__init__(value)
+            return
+            
         curr = self
         parent = None
 
