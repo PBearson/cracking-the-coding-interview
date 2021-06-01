@@ -24,7 +24,17 @@ class BinaryTreeNode:
                 queue.append(curr.left)
             if curr.right:
                 queue.append(curr.right)
+                
         return None
+
+    # Find the max depth of the tree. A single node has a depth of 1.
+    def getMaxDepth(self, root, curDepth = 0):
+        if root == None:
+            return curDepth
+        else:
+            curDepth += 1
+            return max(self.getMaxDepth(root.left, curDepth), self.getMaxDepth(root.right, curDepth))
+
         
     def getSize(self):
         if self.left is None and self.right is None:
@@ -68,6 +78,7 @@ def test():
     leftright = BinaryTreeNode(5)
     rightleft = BinaryTreeNode(6)
     rightright = BinaryTreeNode(7)
+    leftleftleft = BinaryTreeNode(8)
 
     root.left = left
     root.right = right
@@ -75,12 +86,14 @@ def test():
     left.right = leftright
     right.left = rightleft
     right.right = rightright
+    left.left.left = leftleftleft
 
     print(root.getSize(), left.getSize(), right.getSize())
     print(root.getNodeByIndex(0).value)
 
     root.traverseBFS()
     root.traverseDFS()
+    print(root.getMaxDepth(root))
 
 
 if __name__ == "__main__":
