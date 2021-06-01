@@ -26,4 +26,4 @@ array = [3, 4, 7, 9, 12, 81, 100]
 
 bst = convertToBST(array)
 
-bst.traverseBFS()
+assert bst.getMaxDepth(bst) == 3
