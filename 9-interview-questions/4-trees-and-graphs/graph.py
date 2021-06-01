@@ -11,6 +11,10 @@ class Graph:
         if node is not None:
             self.nodes.append(node)
 
+    def insertNodes(self, nodes):
+        for node in nodes:
+            self.insertNode(node)
+
     def traverseDFS(self, root, visited = []):
         print(root.value, end = " ")
         visited.append(root)
