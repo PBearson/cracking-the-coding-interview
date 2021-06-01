@@ -14,11 +14,26 @@ class Graph:
             self.nodes.append(Node(value))
 
     def traverseDFS(self, root, visited = []):
-        print(root.value)
+        print(root.value, end = " ")
         visited.append(root)
         for r in root.neighbors:
             if r not in visited:
                 self.traverseDFS(r)
+        
+
+    def traverseBFS(self, root):
+        visited = [root]
+        queue = [root]
+
+        while len(queue) > 0:
+            curr = queue.pop(0)
+            print(curr.value, end = " ")
+
+            for r in curr.neighbors:
+                if r not in visited:
+                    visited.append(r)
+                    queue.append(r)
+        print("")
 
 class DirectedGraph(Graph):
     def __init__(self, value = None):
@@ -64,6 +79,8 @@ def test():
     g.insertEdge(nB, nE)
 
     g.traverseDFS(nA)
+    print("")
+    g.traverseBFS(nA)
 
 if __name__ == "__main__":
     test()
