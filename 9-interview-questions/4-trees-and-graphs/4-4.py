@@ -77,3 +77,18 @@ tree.left.right.left.right = BinaryTreeNode(0)
 
 assert False == checkBalanced(tree)
 assert False == checkBalancedV2(tree)
+
+tree = BinaryTreeNode(1)
+tree.left = BinaryTreeNode(2)
+tree.right = BinaryTreeNode(9)
+tree.right.left = BinaryTreeNode(10)
+tree.left.left = BinaryTreeNode(3)
+tree.left.right = BinaryTreeNode(7)
+tree.left.right.right = BinaryTreeNode(5)
+tree.left.left.left = BinaryTreeNode(6)
+tree.left.right.left = BinaryTreeNode(12)
+tree.left.right.left.left = BinaryTreeNode(16)
+tree.left.right.left.right = BinaryTreeNode(0)
+
+assert False == checkBalanced(tree)
+assert False == checkBalancedV2(tree)
