@@ -30,17 +30,6 @@ class BinarySearchTree(BinaryTreeNode):
                 else:
                     curr.right = BinaryTreeNode(value, parent)
                     break
-        
-def isBST(bst):
-    if bst is None or bst.getSize() == 1:
-        return True
-    
-    if bst.left is None:
-        return bst.value < bst.right.value and isBST(bst.right)
-    elif bst.right is None:
-        return bst.value >= bst.left.value and isBST(bst.left)
-    else:
-        return bst.value < bst.right.value and bst.value >= bst.left.value and isBST(bst.left) and isBST(bst.right)
 
 def test():
     bst = BinarySearchTree(random.randint(1, 50))
@@ -48,10 +37,7 @@ def test():
         bst.insert(random.randint(1, 50))
 
     bst.traverseBFS()
-    bst.traverseDFS()
-
-    assert True == isBST(bst)
-    
+    bst.traverseDFS()    
 
 if __name__ == "__main__":
     test()
