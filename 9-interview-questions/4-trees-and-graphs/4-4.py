@@ -25,6 +25,27 @@ def findMinDepth(tree, level = 0):
 def checkBalanced(tree):
     return findMaxDepth(tree) - findMinDepth(tree) < 2
 
+def checkBalancedV2(tree):
+    depths = []
+    queue = [(tree, 0)]
+    visited = [tree]
+
+    while len(queue) > 0:
+        currNode, curDepth = queue.pop(0)
+
+        if currNode.left is None and currNode.right is None:
+            if curDepth not in depths:
+                depths.append(curDepth)
+        else:
+            if currNode.left and currNode.left not in visited:
+                visited.append(currNode.left)
+                queue.append((currNode.left, curDepth + 1))
+            if currNode.right and currNode.right not in visited:
+                visited.append(currNode.right)
+                queue.append((currNode.right, curDepth + 1))
+
+    return max(depths) - min(depths) < 2
+
 tree = BinaryTreeNode(1)
 tree.left = BinaryTreeNode(2)
 tree.right = BinaryTreeNode(3)
@@ -35,6 +56,7 @@ tree.right.right = BinaryTreeNode(7)
 tree.right.right.right = BinaryTreeNode(8)
 
 assert True == checkBalanced(tree)
+assert True == checkBalancedV2(tree)
 
 tree = BinaryTreeNode(1)
 tree.left = BinaryTreeNode(2)
@@ -43,12 +65,15 @@ tree.left.left = BinaryTreeNode(3)
 tree.left.right = BinaryTreeNode(7)
 
 assert True == checkBalanced(tree)
+assert True == checkBalancedV2(tree)
 
 tree.left.right.left = BinaryTreeNode(12)
 
 assert False == checkBalanced(tree)
+assert False == checkBalancedV2(tree)
 
 tree.left.right.left.left = BinaryTreeNode(16)
 tree.left.right.left.right = BinaryTreeNode(0)
 
 assert False == checkBalanced(tree)
+assert False == checkBalancedV2(tree)
