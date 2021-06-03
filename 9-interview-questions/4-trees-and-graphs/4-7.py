@@ -59,12 +59,16 @@ def getBuildOrder(projects, dependencies):
         
     return [r.value for r in resolved]
 
-projects = ["a", "b", "c", "d", "e", "f"]
+projects = ["a", "b", "c", "d", "e", "f"] # Either e or f should build first
 dependencies = [("a", "d"), ("f", "b"), ("b", "d"), ("f", "a"), ("d", "c")]
 
 buildOrder = getBuildOrder(projects, dependencies)
 print(buildOrder)
 
-dependencies.append(("e", "f"))
+dependencies.append(("e", "f")) # e must be first
+buildOrder = getBuildOrder(projects, dependencies)
+print(buildOrder)
+
+dependencies.append(("a", "f")) # A cycle -- no build possible!
 buildOrder = getBuildOrder(projects, dependencies)
 print(buildOrder)
