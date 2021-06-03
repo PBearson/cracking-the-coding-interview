@@ -3,15 +3,15 @@
 # Idea: For a given node, its parent, grandparent, great-grandparent, etc., give us information 
 # we need to decide if that given node satisfies the BST property. Basically, the sequence of parents
 # (and whether they were "left" parents or "right" parents, so to speak), tell us all we need to know 
-# about whether the given node is valid in the BST or node. We can recursively check each node, passing in
+# about whether the given node is valid in the BST or not. We can recursively check each node, passing in
 # information about the parents at each recursive call. The information is just a "min" value and a "max" value
 # which the current node's value should fall between. 
 
-# Another way to think about it: Given a node, if we look at the left child, then the value of that child can
-# be at most the value of the parent. In other words, when we look at the left child, we update the max value.
-# If we look at the right child, then the value of that child must be strictly greater than the value of the parent.
-# Thus, when we look at the right child, we update the min value. All children must fall within the min and max values
-# that are updated as needed.
+# Another way to think about it: Given a node, if we look at the left child, then the value of that child (and all 
+# sub-children) can be at most the value of the parent. In other words, when we look at the left child, we update 
+# the max value. If we look at the right child, then the value of that child (and all sub-children) must be strictly 
+# greater than the value of the parent. Thus, when we look at the right child, we update the min value. All children 
+# must fall within the min and max values that are updated as needed.
 
 # In our BST, left child is <= parent, while right child is strictly > parent.
 
