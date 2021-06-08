@@ -5,6 +5,14 @@
 # is the first common ancestor. Else, move to the parent of X, and check the branch which does not contain X.
 # Do this until we find a branch which contains Y.
 
+# What if we do not have links to our parents? We would need another solution.
+
+# Idea 2: If we do not have links to parents, we may assume that we have a reference to the root.
+# Starting from the root, create a string that describes the path taken to find node X. For example,
+# a string rlr means starting from the root, we traversed the right child, then left child, then right
+# child before we found the node. Do the same for node Y. Then find the first common substring, traverse it, 
+# and return the last node.
+
 from binarytreenode import BinaryTreeNode
 
 # Return true if nodeX contains nodeY, else return False 
@@ -14,6 +22,39 @@ def contains(nodeX, nodeY):
     if nodeX == nodeY:
         return True
     return contains(nodeX.left, nodeY) or contains(nodeX.right, nodeY)
+
+# Get the path to a node as a string, e.g., "rlr" means starting from the root,
+# traverse the right child, followed by the left child, followed by the right.
+def getPathToNode(root, node, prefix = ""):
+    if root is None:
+        return
+    if root == node:
+        return prefix
+    return getPathToNode(root.left, node, prefix + "l") or getPathToNode(root.right, node, prefix + "r")
+
+# Find the common path between 2 paths (in the form as strings as described by getPathToNode(.))
+def findCommonPath(path1, path2):
+    p = 0
+    while path1[p] == path2[p]:
+        p += 1
+        if p >= min(len(path1), len(path2)):
+            break
+    return path1[0:p]
+
+# Given a path, find the resulting node by traversing the path.
+def pathToNode(root, path):
+    if len(path) == 0:
+        return root
+    if path[0] == "l":
+        return pathToNode(root.left, path[1:])
+    return pathToNode(root.right, path[1:])
+
+
+def firstCommonAncestorV2(root, nodeX, nodeY):
+    nodeXPath = getPathToNode(root, nodeX)
+    nodeYPath = getPathToNode(root, nodeY)
+    commonPath = findCommonPath(nodeXPath, nodeYPath)
+    return pathToNode(root, commonPath)
 
 def firstCommonAncestor(nodeX, nodeY):
     if contains(nodeX, nodeY):
@@ -52,6 +93,11 @@ llr.right = llrr
 right.left = rl
 right.right = rr
 
-assert firstCommonAncestor(llr, rl) == root
-assert firstCommonAncestor(lll, llrr) == ll
-assert firstCommonAncestor(right, rl) == firstCommonAncestor(rr, right) == right
+# assert firstCommonAncestor(llr, rl) == root
+# assert firstCommonAncestorV2(root, llr, rl) == root
+
+# assert firstCommonAncestor(lll, llrr) == ll
+# assert firstCommonAncestorV2(root, lll, llrr) == ll
+
+# assert firstCommonAncestor(right, rl) == firstCommonAncestor(rr, right) == right
+assert firstCommonAncestorV2(root, right, rl) == firstCommonAncestorV2(root, rr, right) == right
